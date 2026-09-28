@@ -3,11 +3,19 @@
     <string name="widget_label">The 57th</string>
     <string name="today_is">Today is</string>
     <string name="anchor_label">This month never ended:</string>
-    <string name="real_clock_label">Actual clock, for reference</string>
     <string name="wording_label">Wording</string>
     <string name="style_phone">Match my phone</string>
     <string name="style_classic">Classic (English, 91,549th)</string>
     <string name="timely">Timely wording</string>
     <string name="timely_note">Word the date the way it was written in the anchor\'s era.</string>
     <string name="timely_note_english_only">Only available in English. Choose Classic to use it.</string>
+    <string name="lock_screen_label">Lock screen</string>
+    <string name="lock_notification">Quiet notification</string>
+    <string name="lock_notification_note">Keeps today\'s count in your notifications, and on the lock screen if your phone allows notifications there. No sound, no buzz.</string>
+    <string name="notifications_denied">Notifications are off for The 57th, so there\'s nothing to show.</string>
+    <string name="notification_channel">Today\'s count</string>
+    <string name="set_wallpaper">Set as wallpaper…</string>
+    <string name="no_live_wallpapers">This phone doesn\'t support live wallpapers.</string>
+    <string name="wallpaper_label">The 57th</string>
+    <string name="wallpaper_description">Today\'s never-ending date, under the real clock.</string>
 </resources>

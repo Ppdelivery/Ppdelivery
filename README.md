@@ -43,8 +43,18 @@ rule per hundred, comma thousands, a real minus sign: *February the 91,549th*, *
 | `core/` | Pure Kotlin/JVM: the count, ordinal and formatting logic, plus unit tests. |
 | `app/`  | Android app (minSdk 26, no AndroidX): anchor picker and home-screen widget. |
 
-The widget shows the real clock (`TextClock`) beside the count and refreshes just after
-local midnight via an inexact alarm, and on time/timezone changes. It only reads the
+### Where the count shows up
+
+- **Home-screen widget** — the real clock beside the count.
+- **Quiet notification** (off by default) — an ongoing, soundless notification. Android
+  doesn't let apps draw on the lock screen, but notifications appear there if the phone's
+  lock-screen notification settings allow it. Asks for notification permission on Android 13+.
+- **Live wallpaper** — "Set as wallpaper…" in the app opens the system preview, where you
+  pick home screen, lock screen or both. The count sits below the middle so it doesn't
+  collide with the lock-screen clock; follows dark mode.
+
+The widget shows the real clock (`TextClock`) beside the count and refreshes (with the notification) just after
+local midnight via an inexact alarm, and on time/timezone/language changes and reboots. It only reads the
 system date — it never changes it, and needs no special permissions.
 
 ## Build

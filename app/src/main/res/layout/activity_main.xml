@@ -119,9 +119,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="24dp"
             android:fontFamily="serif"
             android:textColor="@color/ink_muted"
             android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="serif"
+            android:text="@string/lock_screen_label"
+            android:textColor="@color/ink_muted"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/lock_notification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="serif"
+            android:text="@string/lock_notification"
+            android:textColor="@color/ink"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="serif"
+            android:text="@string/lock_notification_note"
+            android:textColor="@color/ink_muted"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/set_wallpaper"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="serif"
+            android:text="@string/set_wallpaper"
+            android:textColor="@color/ink" />
     </LinearLayout>
 </ScrollView>

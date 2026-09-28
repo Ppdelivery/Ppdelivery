@@ -1,15 +1,23 @@
 package app.the57th
 
+import android.Manifest
 import android.app.Activity
+import android.app.WallpaperManager
+import android.content.ActivityNotFoundException
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.ComponentName
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.widget.Button
 import android.widget.NumberPicker
 import android.widget.RadioGroup
 import android.widget.Switch
 import android.widget.TextView
+import android.widget.Toast
 import app.the57th.core.FiftySeventh
 import java.time.Month
 import java.time.YearMonth
@@ -18,12 +26,17 @@ import java.util.Locale
 
 class MainActivity : Activity() {
 
+    private companion object {
+        const val REQUEST_NOTIFICATIONS = 1
+    }
+
     private lateinit var today: TextView
     private lateinit var monthPicker: NumberPicker
     private lateinit var yearPicker: NumberPicker
     private lateinit var style: RadioGroup
     private lateinit var timely: Switch
     private lateinit var timelyNote: TextView
+    private lateinit var lockNotification: Switch
 
     private val dayWatcher = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) = render()
@@ -78,7 +91,52 @@ class MainActivity : Activity() {
             changed()
         }
 
+        lockNotification = findViewById(R.id.lock_notification)
+        lockNotification.isChecked = AnchorStore.lockNotification(this)
+        lockNotification.setOnCheckedChangeListener { _, on ->
+            if (on && needsNotificationPermission()) {
+                requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), REQUEST_NOTIFICATIONS)
+            } else {
+                AnchorStore.setLockNotification(this, on)
+                Today.refreshEverywhere(this)
+            }
+        }
+
+        findViewById<Button>(R.id.set_wallpaper).setOnClickListener { openWallpaperPicker() }
+
         syncSettingsUi()
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, results: IntArray) {
+        if (requestCode != REQUEST_NOTIFICATIONS) return
+        val granted = results.firstOrNull() == PackageManager.PERMISSION_GRANTED
+        if (!granted) {
+            lockNotification.isChecked = false
+            Toast.makeText(this, R.string.notifications_denied, Toast.LENGTH_LONG).show()
+        }
+        AnchorStore.setLockNotification(this, granted)
+        Today.refreshEverywhere(this)
+    }
+
+    private fun needsNotificationPermission() =
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+
+    /** Straight to our wallpaper's preview; the system asks home, lock screen, or both. */
+    private fun openWallpaperPicker() {
+        val preview = Intent(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER).putExtra(
+            WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
+            ComponentName(this, CountWallpaper::class.java),
+        )
+        try {
+            startActivity(preview)
+        } catch (e: ActivityNotFoundException) {
+            try {
+                startActivity(Intent(WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER))
+            } catch (e: ActivityNotFoundException) {
+                Toast.makeText(this, R.string.no_live_wallpapers, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     override fun onResume() {
@@ -100,7 +158,7 @@ class MainActivity : Activity() {
     private fun changed() {
         syncSettingsUi()
         render()
-        CountWidget.refreshAll(this)
+        Today.refreshEverywhere(this)
     }
 
     /** Month names follow the chosen wording; timely wording only exists in English. */

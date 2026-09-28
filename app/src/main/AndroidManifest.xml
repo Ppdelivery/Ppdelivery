@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Lock-screen notification (asked for only when the user switches it on). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Put the notification back after a restart. -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-feature
+        android:name="android.software.live_wallpaper"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -23,16 +32,36 @@
             android:label="@string/widget_label">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <!-- The day can change under us: midnight, manual clock change, travel. -->
-                <action android:name="android.intent.action.DATE_CHANGED" />
-                <action android:name="android.intent.action.TIME_SET" />
-                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
-                <!-- Phone language changed: re-word the date. -->
-                <action android:name="android.intent.action.LOCALE_CHANGED" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
+
+        <!-- The day can change under us: midnight, manual clock change, travel, new language, reboot. -->
+        <receiver
+            android:name=".DayReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".CountWallpaper"
+            android:exported="true"
+            android:label="@string/wallpaper_label"
+            android:permission="android.permission.BIND_WALLPAPER">
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/wallpaper" />
+        </service>
     </application>
 </manifest>

@@ -11,10 +11,30 @@ Anchor **February 1776** and it's **February the 91,549th**.
 - `count = (whole days from the 1st of the anchor month to today) + 1`
 - Plain (proleptic) Gregorian subtraction via `java.time`. No calendar reform, no Julian
   conversion — "February 1776" is just the modern month label.
-- Future anchors go negative and are shown as-is: *February the −40th*.
-- Display is month name + ordinal; the year is dropped on purpose.
-- Suffixes follow English rules with the 11/12/13 exception per hundred
-  (91,311th, 91,321st). Thousands are always separated with a comma.
+- Future anchors go negative and are shown as-is.
+- The year is always dropped.
+
+## Wording (in-app settings)
+
+**Match my phone** (default): the phone's language, word order, digits, thousands
+separator and minus sign, using the platform's own month-day pattern.
+English phones get the ordinal — *August the 57th* (US) or *the 57th of August* (UK);
+other languages use their native form — *57. August*, *57 août*, *57 августа*.
+
+**Classic**: the original fixed style on any phone — English month + ordinal, 11th/12th/13th
+rule per hundred, comma thousands, a real minus sign: *February the 91,549th*, *February the −40th*.
+
+**Timely wording** (off by default, English only): words the date as the anchor's era would.
+
+| Anchor year | Example |
+| --- | --- |
+| before 1500 | *the .lvij. day of August* (medieval numerals; 91,549 → `.xcj.M.dxlix.`) |
+| 1500–1699 | *the 57th Day of August* |
+| 1700–1799 | *Augt. 57th* / *Feby. 91,549th* (Georgian letter heading) |
+| 1800–1899 | *the 57th inst.* ("of this month") |
+| 1900–1959 | *AUGUST 57TH STOP* (telegram) |
+| 1960–1999 | *AUG 57* (digital display) |
+| 2000 on, or count ≤ 0 | modern wording |
 
 ## Layout
 

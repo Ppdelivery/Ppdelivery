@@ -71,5 +71,57 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:fontFamily="serif"
+            android:text="@string/wording_label"
+            android:textColor="@color/ink_muted"
+            android:textSize="16sp" />
+
+        <RadioGroup
+            android:id="@+id/style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp">
+
+            <RadioButton
+                android:id="@+id/style_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="serif"
+                android:text="@string/style_phone"
+                android:textColor="@color/ink" />
+
+            <RadioButton
+                android:id="@+id/style_classic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="serif"
+                android:text="@string/style_classic"
+                android:textColor="@color/ink" />
+        </RadioGroup>
+
+        <Switch
+            android:id="@+id/timely"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="serif"
+            android:text="@string/timely"
+            android:textColor="@color/ink"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/timely_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="serif"
+            android:textColor="@color/ink_muted"
+            android:textSize="13sp" />
     </LinearLayout>
 </ScrollView>

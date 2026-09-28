@@ -8,7 +8,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
-import app.the57th.core.FiftySeventh
 import java.time.LocalDate
 import java.time.ZoneId
 
@@ -28,7 +27,8 @@ class CountWidget : AppWidgetProvider() {
             ACTION_MIDNIGHT,
             Intent.ACTION_DATE_CHANGED,
             Intent.ACTION_TIME_CHANGED,
-            Intent.ACTION_TIMEZONE_CHANGED -> refreshAll(context)
+            Intent.ACTION_TIMEZONE_CHANGED,
+            Intent.ACTION_LOCALE_CHANGED -> refreshAll(context)
             else -> super.onReceive(context, intent)
         }
     }
@@ -49,7 +49,7 @@ class CountWidget : AppWidgetProvider() {
         }
 
         private fun views(context: Context): RemoteViews {
-            val count = FiftySeventh.format(AnchorStore.get(context), LocalDate.now())
+            val count = AnchorStore.todayText(context)
             val open = PendingIntent.getActivity(
                 context, 0,
                 Intent(context, MainActivity::class.java),

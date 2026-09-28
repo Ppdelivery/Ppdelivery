@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">The 57th</string>
+    <string name="widget_label">The 57th</string>
+    <string name="today_is">Today is</string>
+    <string name="anchor_label">This month never ended:</string>
+    <string name="real_clock_label">Actual clock, for reference</string>
+</resources>

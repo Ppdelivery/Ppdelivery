@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A tear-off calendar page that says 57. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <path android:fillColor="#FFF7F3EA" android:pathData="M8,6h32a4,4 0,0 1,4 4v30a4,4 0,0 1,-4 4h-32a4,4 0,0 1,-4 -4v-30a4,4 0,0 1,4 -4z" />
+    <path android:fillColor="#FF1B1B1B" android:pathData="M8,6h32a4,4 0,0 1,4 4v6h-40v-6a4,4 0,0 1,4 -4z" />
+    <!-- 5 -->
+    <path android:fillColor="#FF1B1B1B" android:pathData="M11,21h11v3h-8v4h5a4,4 0,0 1,4 4v4a4,4 0,0 1,-4 4h-8v-3h8a1,1 0,0 0,1 -1v-4a1,1 0,0 0,-1 -1h-8z" />
+    <!-- 7 -->
+    <path android:fillColor="#FF1B1B1B" android:pathData="M26,21h12v3l-6,16h-3.2l5.9,-16h-8.7z" />
+</vector>
